@@ -1,0 +1,21 @@
+<% include ./partials/header %>
+<div class="row text-center">
+    <div class="col-md-12">
+        <form class="form-signin" action="/login" method="POST">
+            <h1 class="h3 mb-3 font-weight-normal">Please Log In</h1>
+            <label for="inputUsername" class="sr-only">Username</label>
+            <input type="text" id="inputUsername" class="form-control" name="username"
+                   placeholder="username" required
+                   autofocus>
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input type="password" id="inputPassword" class="form-control" name="password"
+                   placeholder="password"
+                   required>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
+        </form>
+        <div class="form-signin">
+            <a href="/raves">Go Back</a>
+        </div>
+    </div>
+</div>
+<% include ./partials/footer %>

@@ -1,0 +1,28 @@
+<% include ../partials/header %>
+
+<header class="jumbotron bg-light text-dark">
+    <div class="container">
+        <h1>Welcome To RaverBang!</h1>
+        <p>View our hand-picked raves from all over the world</p>
+        <p>
+            <a class="btn btn-dark btn-large" href="/raves/new">Add New Rave</a>
+        </p>
+    </div>
+</header>
+
+<main role="main" class="row text-center">
+    <% raves.forEach((rave)=>{ %>
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="card bg-light text-dark">
+                <img class="card-img-top" src="<%= rave.image %>" alt="<%= rave.name %>">
+                <div class="card-body">
+                    <h5 class="card-title"><%= rave.name %></h5>
+                    <a href="/raves/<%= rave._id %>" class="btn btn-dark">More Info</a>
+                </div>
+            </div>
+        </div>
+    <% }); %>
+</main>
+
+
+<% include ../partials/footer %>

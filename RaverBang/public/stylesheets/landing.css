@@ -1,0 +1,77 @@
+#landing-header {
+    z-index: 1;
+    position: relative;
+    text-align: center;
+    padding-top: 40vh;
+}
+
+#landing-header h1 {
+    color: #fff;
+}
+
+.slideshow {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.slideshow li {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    opacity: 0;
+    z-index: 0;
+    animation: imageAnimation 50s linear infinite;
+}
+
+.slideshow li:nth-child(1) {
+    background-image: url(https://media.timeout.com/images/103890653/1024/576/image.jpg)
+}
+
+.slideshow li:nth-child(2) {
+    background-image: url(https://media.timeout.com/images/103650282/1024/576/image.jpg);
+    animation-delay: 10s;
+}
+
+.slideshow li:nth-child(3) {
+    background-image: url(https://d1vp8nomjxwyf1.cloudfront.net/wp-content/uploads/sites/9/2016/06/09111029/ROOFTOP-1-1872x1200.jpg);
+    animation-delay: 20s;
+}
+
+.slideshow li:nth-child(4) {
+    background-image: url(https://scontent.flis6-1.fna.fbcdn.net/v/t1.0-9/31525533_2042786649271526_429451495004438528_o.jpg?_nc_cat=0&oh=2ba9145179c8352d179017a12e937961&oe=5C0167E9);
+    animation-delay: 30s;
+}
+
+.slideshow li:nth-child(5) {
+    background-image: url(https://scontent.flis6-1.fna.fbcdn.net/v/t31.0-8/10495389_10152195466421947_7492009652612228584_o.jpg?_nc_cat=0&oh=5b399e20c2a71a81f30dc10bb5a6f4ae&oe=5C0908F6);
+    animation-delay: 40s;
+}
+
+@keyframes imageAnimation {
+    0% {
+        opacity: 0;
+        animation-timing-function: ease-in;
+    }
+    10% {
+        opacity: 1;
+        animation-timing-function: ease-out;
+    }
+    20% {
+        opacity: 1
+    }
+    30% {
+        opacity: 0
+    }
+}
