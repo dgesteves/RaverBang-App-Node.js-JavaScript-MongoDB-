@@ -1,27 +1,42 @@
-const express = require("express"),
-    app = express(),
-    bodyParser = require("body-parser"),
-    mongoose = require("mongoose"),
-    flash = require("connect-flash"),
-    passport = require("passport"),
-    LocalStrategy = require("passport-local"),
-    methodOverride = require("method-override"),
-    Rave = require("./models/rave"),
-    Comment = require("./models/comment"),
-    User = require("./models/user"),
+const createError = require('http-errors'),
+    dotenv = require('dotenv'),
+    express = require('express'),
+    path = require('path'),
+    cookieParser = require('cookie-parser'),
+    logger = require('morgan'),
+    bodyParser = require('body-parser'),
+    mongoose = require('mongoose'),
+    flash = require('connect-flash'),
+    passport = require('passport'),
+    LocalStrategy = require('passport-local'),
+    methodOverride = require('method-override'),
+    User = require('./models/user'),
     seedDB = require("./seeds");
 
 //requiring routes
-const commentRoutes = require("./routes/comments"),
-    raveRoutes = require("./routes/raves"),
-    indexRoutes = require("./routes/index");
+const indexRouter = require('./routes/index'),
+    raveRouter = require('./routes/raves'),
+    commentRouter = require('./routes/comments');
 
-mongoose.connect("mongodb://localhost/RaverBang");
+dotenv.config();
+const app = express();
+
+const url = process.env.DATABASEURL || 'mongodb://localhost/RaverBang';
+mongoose.connect(url);
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+app.use(logger('dev'));
 app.use(bodyParser.urlencoded({extended: true}));
-app.set("view engine", "ejs");
-app.use(express.static(__dirname + "/public"));
-app.use(methodOverride("_method"));
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(methodOverride('_method'));
 app.use(flash());
+
 //seedDB(); //seed the database
 
 // PASSPORT CONFIGURATION
@@ -43,9 +58,24 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use("/", indexRoutes);
-app.use("/raves", raveRoutes);
-app.use("/raves/:id/comments", commentRoutes);
+app.use('/', indexRouter);
+app.use('/raves', raveRouter);
+app.use('/raves/:id/comments', commentRouter);
 
+// catch 404 and forward to error handler
+app.use((req, res, next) => {
+    next(createError(404));
+});
 
-app.listen(3000, () => console.log('RaverBang app listening on port 3000!'));
+// error handler
+app.use((err, req, res, next) => {
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error');
+});
+
+module.exports = app;

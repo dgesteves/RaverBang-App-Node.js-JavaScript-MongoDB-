@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="JavaScriptLibraryMappings">
-    <file url="PROJECT" libraries="{@types/body-parser, @types/ejs, @types/express, @types/express-mongo-sanitize, @types/method-override, @types/mongodb, @types/mongoose, @types/passport, @types/passport-local, @types/passport-local-mongoose}" />
-  </component>
-</project>
